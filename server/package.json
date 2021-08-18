@@ -1,0 +1,39 @@
+{
+  "name": "eshi-blood-amp",
+  "version": "1.0.0",
+  "description": "Eshi blood project for assignment AMP using flutter",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Michael-pi-max/Eshi-Blood-AMP.git"
+  },
+  "keywords": [
+    "blood",
+    "donation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Michael-pi-max/Eshi-Blood-AMP/issues"
+  },
+  "homepage": "https://github.com/Michael-pi-max/Eshi-Blood-AMP#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.7",
+    "mongoose-paginate": "^5.0.3",
+    "multer": "^1.4.3"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12"
+  }
+}
