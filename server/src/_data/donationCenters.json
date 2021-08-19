@@ -1,0 +1,81 @@
+[
+    {
+      "_id": "5d7a514b5d2c12c7449be220",
+      "name": "Adwa Donation Center",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Kirkos",
+        "woreda": "04"
+      },
+      "status": "open",
+      "timeSlot": "5d7a514b5d2c12c7449be421",
+      "createdBy": "5d7a514b5d2c12c7449be021",
+      "updatedBy": "5d7a514b5d2c12c7449be021"
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be221",
+      "name": "Kality Donation Center",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Kality",
+        "woreda": "04"
+      },
+      "status": "open",
+      "timeSlot": "5d7a514b5d2c12c7449be422",
+      "createdBy": "5d7a514b5d2c12c7449be021",
+      "updatedBy": "5d7a514b5d2c12c7449be021"
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be222",
+      "name": "Bole Donation Center",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Bole",
+        "woreda": "04"
+      },
+      "status": "open",
+      "timeSlot": "5d7a514b5d2c12c7449be421",
+      "createdBy": "5d7a514b5d2c12c7449be021",
+      "updatedBy": "5d7a514b5d2c12c7449be021"
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be223",
+      "name": "Kirkos Donation Center",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Kirkos",
+        "woreda": "04"
+      },
+      "status": "open",
+      "timeSlot": "5d7a514b5d2c12c7449be421",
+      "createdBy": "5d7a514b5d2c12c7449be021",
+      "updatedBy": "5d7a514b5d2c12c7449be021"
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be224",
+      "name": "Yeka Donation Center",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Yeka",
+        "woreda": "04"
+      },
+      "status": "open",
+      "timeSlot": "5d7a514b5d2c12c7449be421",
+      "createdBy": "5d7a514b5d2c12c7449be021",
+      "updatedBy": "5d7a514b5d2c12c7449be021"
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be225",
+      "name": "Lideta Donation Center",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Lideta",
+        "woreda": "04"
+      },
+      "status": "open",
+      "timeSlot": "5d7a514b5d2c12c7449be421",
+      "createdBy": "5d7a514b5d2c12c7449be021",
+      "updatedBy": "5d7a514b5d2c12c7449be021"
+    }
+  ]
+  
