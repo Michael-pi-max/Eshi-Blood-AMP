@@ -1,0 +1,51 @@
+const mongoose = require("mongoose");
+
+const requestSchema = new mongoose.Schema(
+  {
+    unitsNeeded: {
+      type: Number,
+    },
+    reason: {
+      type: String,
+    },
+    totalDonations: {
+      type: Number,
+      default: 0,
+    },
+    status: {
+      type: String,
+      enum: ["active", "pending", "closed"],
+      default: "pending",
+    },
+    bloodType: {
+      type: "",
+     
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    updatedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    donors: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+
+const Request = mongoose.model("Request", requestSchema);
+
+module.exports = Request;
