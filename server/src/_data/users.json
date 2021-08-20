@@ -1,0 +1,72 @@
+[
+    {
+      "_id": "5d7a514b5d2c12c7449be020",
+      "firstName": "user-Abenezer",
+      "lastName": "Atnafu",
+      "phoneNumber": "0946414257",
+      "email": "abene@gmail.com",
+      "password": "qwerty123",
+      "dateOfBirth": "2000-06-15T13:45:30",
+      "image": "users-1630179617858-.jpg",
+      "bloodType": "5d7a514b5d2c12c7449be240",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Kolefe",
+        "woreda": "05"
+      },
+      "roles": ["5d7a514b5d2c12c7449be142"],
+      "totalDonations": 2
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be023",
+      "firstName": "user-Abenezer",
+      "lastName": "Atnafu",
+      "phoneNumber": "0946414258",
+      "email": "abene@gmail.com",
+      "password": "qwerty123",
+      "dateOfBirth": "2000-06-15T13:45:30",
+      "image": "users-1630179617858-.jpg",
+      "bloodType": "5d7a514b5d2c12c7449be240",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Kolefe",
+        "woreda": "05"
+      },
+      "roles": "5d7a514b5d2c12c7449be142"
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be021",
+      "firstName": "admin-Abenezer",
+      "lastName": "Atnafu",
+      "phoneNumber": "0912166196",
+      "email": "abene@gmail.com",
+      "password": "qwerty123",
+      "dateOfBirth": "2000-06-15T13:45:30",
+      "image": "users-1630179617858-.jpg",
+      "bloodType": "5d7a514b5d2c12c7449be241",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Kolefe",
+        "woreda": "02"
+      },
+      "roles": "5d7a514b5d2c12c7449be143"
+    },
+    {
+      "_id": "5d7a514b5d2c12c7449be022",
+      "firstName": "admin-Abenezer",
+      "lastName": "Atnafu",
+      "phoneNumber": "0910203223",
+      "email": "abene@gmail.com",
+      "password": "qwerty123",
+      "dateOfBirth": "2000-06-15T13:45:30",
+      "image": "users-1630179617858-.jpg",
+      "bloodType": "5d7a514b5d2c12c7449be241",
+      "address": {
+        "state": "Addis Ababa",
+        "city": "Kolefe",
+        "woreda": "02"
+      },
+      "roles": "5d7a514b5d2c12c7449be143"
+    }
+  ]
+  
