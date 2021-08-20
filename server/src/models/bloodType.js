@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate");
 
 const schema = new mongoose.Schema(
   {
@@ -31,7 +32,7 @@ const schema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+schema.plugin(mongoosePaginate);
 
 const BloodType = mongoose.model("BloodType", schema);
 

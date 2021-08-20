@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const mongoosePaginate = require("mongoose-paginate");  
+
 /**
  * Schema for storing role
  *  * roleName - role name
@@ -37,6 +39,9 @@ const schema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+
+schema.plugin(mongoosePaginate);
 
 
 const Role = mongoose.model("Role", schema);
