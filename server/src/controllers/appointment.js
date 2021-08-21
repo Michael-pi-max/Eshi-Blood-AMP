@@ -1,11 +1,17 @@
 const Appointment = require("../models/appointment");
 
-
+const { validationResult } = require("express-validator");
 const User = require("../models/user");
 
 exports.getAllAppointments = async (req, res, next) => {
   try {
-   
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 10;
     const status = req.query.status || "pending";
@@ -19,7 +25,8 @@ exports.getAllAppointments = async (req, res, next) => {
       {
         isDeleted: false,
         status,
-       
+        // startDate: { $lte: Date(startDate) },
+        // endDate: { $gte: Date(endDate) },
       },
       {
         page,
@@ -42,7 +49,14 @@ exports.getAllAppointments = async (req, res, next) => {
 
 exports.getAppointment = async (req, res, next) => {
   try {
-   
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     const appointment = await Appointment.findById(req.params.id).populate({
       path: "userId acceptorId donationCenter",
       populate: { path: "roles", model: "Role" },
@@ -71,7 +85,15 @@ exports.getAppointment = async (req, res, next) => {
 
 exports.createAppointment = async (req, res, next) => {
   try {
-    
+    console.log(req.body);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     const appointment = await Appointment.create({
       ...req.body,
       userId: req.user._id,
@@ -87,6 +109,11 @@ exports.createAppointment = async (req, res, next) => {
       { appointed: true }
     );
 
+    // appointment = await Appointment.findById(appointment._id).populate({
+    //   path: "userId acceptorId donationCenter",
+    //   populate: { path: "roles", model: "Role" },
+    // });
+
     res.status(201).json({
       status: "success",
       appointment,
@@ -98,7 +125,14 @@ exports.createAppointment = async (req, res, next) => {
 
 exports.updateAppointment = async (req, res, next) => {
   try {
-   
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     let appointment = await Appointment.findByIdAndUpdate(
       req.params.id,
       {
@@ -203,7 +237,13 @@ exports.getUserAppointment = async (req, res, next) => {
 
 exports.getDonationCenterAllAppointments = async (req, res, next) => {
   try {
-   
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 1;
     const status = req.query.status || "pending";
