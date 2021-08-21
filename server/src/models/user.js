@@ -52,7 +52,8 @@ const schema = new mongoose.Schema(
       select: false,
     },
     bloodType: {
-      type: "",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "BloodType",
      
     },
     roles: {
