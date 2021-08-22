@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const mongoosePaginate = require("mongoose-paginate");
 
 /**
  * Schema for storing user
@@ -52,14 +54,13 @@ const schema = new mongoose.Schema(
       select: false,
     },
     bloodType: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "BloodType",
-     
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BloodType",
     },
     roles: {
-      type: "",
-     
-    },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Role",
+      },
     totalDonations: {
       type: Number,
       default: 0,
@@ -79,18 +80,20 @@ const schema = new mongoose.Schema(
 );
 
 schema.pre("save", async function (next) {
-    if (this.isModified("password")) {
-      this.password = await bcrypt.hash(this.password, 10);
-    }
-    next();
-  });
-  
-  schema.methods.verifyPassword = async function (
-    candidatePassword,
-    userPassword
-  ) {
-    return await bcrypt.compare(candidatePassword, userPassword);
-  };
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
+});
+
+schema.methods.verifyPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+schema.plugin(mongoosePaginate);
 
 const User = mongoose.model("User", schema);
 

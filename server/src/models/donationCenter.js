@@ -42,11 +42,11 @@ const donationCenterSchema = new mongoose.Schema(
       country: String,
     },
     timeSlot: {
-      type: "",
-     
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TimeSlot",
     },
     createdBy: {
-      type: "",
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
     updatedBy: {
