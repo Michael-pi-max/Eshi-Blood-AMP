@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate");
 
 const donationCenterSchema = new mongoose.Schema(
   {
@@ -65,7 +66,7 @@ const donationCenterSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+donationCenterSchema.plugin(mongoosePaginate);
 
 const DonationCenter = mongoose.model("DonationCenter", donationCenterSchema);
 

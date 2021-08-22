@@ -78,6 +78,19 @@ const schema = new mongoose.Schema(
   }
 );
 
+schema.pre("save", async function (next) {
+    if (this.isModified("password")) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
+    next();
+  });
+  
+  schema.methods.verifyPassword = async function (
+    candidatePassword,
+    userPassword
+  ) {
+    return await bcrypt.compare(candidatePassword, userPassword);
+  };
 
 const User = mongoose.model("User", schema);
 
