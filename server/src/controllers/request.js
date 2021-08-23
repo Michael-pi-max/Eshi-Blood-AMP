@@ -8,6 +8,13 @@ const { model } = require("mongoose");
 
 exports.getAllRequest = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 10;
 
@@ -34,6 +41,13 @@ exports.getAllRequest = async (req, res, next) => {
 
 exports.getRequest = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const request = await Request.findOne({
       _id: req.params.id,
       isDeleted: false,
@@ -62,6 +76,13 @@ exports.getRequest = async (req, res, next) => {
 
 exports.createRequest = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     console.log(req.body.bloodType + "**********************");
     const userBloodType = await BloodType.findOne({
       bloodTypeName: req.body.bloodType,
@@ -90,6 +111,13 @@ exports.createRequest = async (req, res, next) => {
 
 exports.updateRequest = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
 
     const userBloodType = await BloodType.findOne({
       bloodTypeName: req.body.bloodType,
@@ -124,6 +152,13 @@ exports.updateRequest = async (req, res, next) => {
 
 exports.deleteRequest = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const request = await Request.findByIdAndUpdate(req.params.id, {
       isDeleted: true,
     });
@@ -145,6 +180,13 @@ exports.deleteRequest = async (req, res, next) => {
 
 exports.acceptRequest = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
 
     let request = await Request.findOne({
       _id: req.params.id,
