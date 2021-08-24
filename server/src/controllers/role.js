@@ -4,6 +4,13 @@ const User = require("../models/user");
 
 exports.getAllRoles = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 1;
 
@@ -26,6 +33,13 @@ exports.getAllRoles = async (req, res, next) => {
 
 exports.getRole = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const role = await Role.findById(req.params.id);
     if (!role) {
       return res.status(404).json({
@@ -50,6 +64,13 @@ exports.getRole = async (req, res, next) => {
 
 exports.createRole = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
 
     const doesExist = await Role.find({ roleName: req.body.roleName });
     if (doesExist) {
@@ -75,6 +96,13 @@ exports.createRole = async (req, res, next) => {
 
 exports.updateRole = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
 
     const role = await Role.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -97,6 +125,13 @@ exports.updateRole = async (req, res, next) => {
 
 exports.deleteRole = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const role = await Role.findByIdAndUpdate(req.params.id, {
       isDeleted: true,
     });
