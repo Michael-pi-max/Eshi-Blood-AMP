@@ -3,6 +3,7 @@ const Role = require("../models/role");
 const BloodType = require("../models/bloodType");
 
 const jwt = require("jsonwebtoken");
+const { validationResult } = require("express-validator");
 
 // uplodaing images
 
@@ -28,7 +29,14 @@ const isAgeAboveEighteen = async function (user) {
 
 exports.login = async (req, res, next) => {
   try {
-   
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     const user = await User.findOne({
       phoneNumber: req.body.phoneNumber,
     })
@@ -56,7 +64,14 @@ exports.login = async (req, res, next) => {
 
 exports.signup = async (req, res, next) => {
   try {
-  
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     const alreadyUserExisted = await User.exists({
       phoneNumber: req.body.phoneNumber,
     });
@@ -124,7 +139,14 @@ exports.searchUserByName = async (req, res, next) => {
 
 exports.getUserById = async (req, res, next) => {
   try {
-      const user = await User.findById(req.params.id).populate("roles");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+    const user = await User.findById(req.params.id).populate("roles");
     if (!user) {
       return res.status(404).json({
         status: "error",
@@ -148,7 +170,14 @@ exports.getUserById = async (req, res, next) => {
 
 exports.updateUser = async (req, res, next) => {
   try {
-  
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     }).populate("roles");
@@ -170,7 +199,14 @@ exports.updateUser = async (req, res, next) => {
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-      const page = req.query.page * 1 || 1;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+    const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 10;
     const bloodType = req.query.bloodType || null;
 
