@@ -6,7 +6,14 @@ DonationCenter.createIndexes({ address: { city: "text" } });
 
 exports.getAllDonationCenter = async (req, res, next) => {
   try {
-    
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(404).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 10;
     const status = req.query.status || "open";
@@ -34,6 +41,14 @@ exports.getAllDonationCenter = async (req, res, next) => {
 
 exports.getDonationCenter = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+
+    // if (!errors.isEmpty()) {
+    //   return res.status(404).json({
+    //     status: "error",
+    //     message: errors.array()[0].msg,
+    //   });
+    // }
 
     const donationCenter = await DonationCenter.findOne({
       _id: req.params.id,
@@ -66,7 +81,15 @@ exports.getDonationCenter = async (req, res, next) => {
 
 exports.createDonationCenter = async (req, res, next) => {
   try {
-    
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(404).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     const donationCenter = await DonationCenter.create({
       ...req.body,
       timeSlot: req.body.timeSlot._id,
@@ -85,7 +108,14 @@ exports.createDonationCenter = async (req, res, next) => {
 
 exports.updateDonationCenter = async (req, res, next) => {
   try {
-    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
     const donationCenter = await DonationCenter.findByIdAndUpdate(
       req.params.id,
       { ...req.body, updatedBy: req.user._id },
@@ -112,7 +142,13 @@ exports.updateDonationCenter = async (req, res, next) => {
 
 exports.deleteDonationCenter = async (req, res, next) => {
   try {
-    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
     const donationCenter = await DonationCenter.findByIdAndUpdate(
       req.params.id,
       {
