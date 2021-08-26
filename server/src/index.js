@@ -6,11 +6,17 @@ const path = require("path");
 const cors = require("cors");
 dotenv.config();
 
-const app = express();
-
 /**
  * Routers
  */
+ const userRouter = require("./routes/user");
+ const roleRouter = require("./routes/role");
+ const donationCenterRouter = require("./routes/donationCenter");
+ const appointmentRouter = require("./routes/appointment");
+ const timeSlotRouter = require("./routes/timeSlot");
+ const requestRouter = require("./routes/request");
+ 
+ const app = express();
 
 /**
  * Database configuration
@@ -39,6 +45,14 @@ app.use(express.static(path.join(__dirname, "../public")));
 /**
  * Route Middleware
  */
+ app.use("/api/v1/users", userRouter);
+ app.use("/api/v1/roles", roleRouter);
+ app.use("/api/v1/donationCenters", donationCenterRouter);
+ app.use("/api/v1/appointments", appointmentRouter);
+ app.use("/api/v1/timeSlots", timeSlotRouter);
+ app.use("/api/v1/requests", requestRouter);
+
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
