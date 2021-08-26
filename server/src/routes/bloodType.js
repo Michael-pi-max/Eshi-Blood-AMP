@@ -7,7 +7,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(getAllBloodTypes)
+  .get(verifyUser, bloodTypeController.getAllBloodTypes)
   .post(
     verifyUser,
     verifyRole("admin", "create", "bloodType"),

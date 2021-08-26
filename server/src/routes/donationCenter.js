@@ -10,6 +10,7 @@ router
   .route("/")
   .get(
     verifyUser,
+    verifyRole("user", "read", "donationCenter"),
     donationCenterController.getAllDonationCenter
   )
   .post(

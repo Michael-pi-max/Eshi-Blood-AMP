@@ -10,6 +10,7 @@ router
   .get(verifyUser, appointmentController.getAllAppointments)
   .post(
     verifyUser,
+    verifyRole("user", "create", "appointment"),
     appointmentValidation.validate("CREATE"),
     appointmentController.createAppointment
   );
