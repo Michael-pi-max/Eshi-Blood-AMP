@@ -50,7 +50,7 @@ const donationCenterSchema = new mongoose.Schema(
       ref: "User",
     },
     updatedBy: {
-      type: "type: mongoose.Schema.Types.ObjectId",
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
     totalDonations: {

@@ -19,7 +19,7 @@ const requestSchema = new mongoose.Schema(
       default: "pending",
     },
     bloodType: {
-      type: "mongoose.Schema.Types.ObjectId",
+      type: mongoose.Schema.Types.ObjectId,
       ref: "BloodType",
     },
     createdBy: {
@@ -45,7 +45,7 @@ const requestSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-appointmentSchema.plugin(mongoosePaginate);
+requestSchema.plugin(mongoosePaginate);
 
 const Request = mongoose.model("Request", requestSchema);
 
