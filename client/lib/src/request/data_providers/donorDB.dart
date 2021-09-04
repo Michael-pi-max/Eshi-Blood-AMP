@@ -85,7 +85,7 @@ class DonorDB {
       }
 
       final db = await dbProvider.database;
-      var donorIn = "insert into donor(id, fistname, lastname,"
+      var donorIn = "insert into donor(id, firstname, lastname,"
           " phonenumber, email, image, state, city, wereda, "
           "gender, dateofbirth, totaldonation, roleid)"
           " values ( '${donor.id}' ,'${donor.firstname}' ,'${donor.lastname}' ,'${donor.phoneNumber}' ,'${donor.email}' ,"
