@@ -43,7 +43,7 @@ router
 
 router
   .route("/accept/:id")
-  .patch(
+  .get(
     verifyUser,
     verifyRole("user", "update", "request"),
     requestController.acceptRequest

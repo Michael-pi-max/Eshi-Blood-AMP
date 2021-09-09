@@ -8,8 +8,7 @@ const appointmentSchema = new mongoose.Schema(
       ref: "User",
     },
     acceptorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
     },
     startDate: {
       type: Date,
@@ -51,6 +50,7 @@ const appointmentSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
 appointmentSchema.plugin(mongoosePaginate);
 
 const Appointment = mongoose.model("Appointment", appointmentSchema);

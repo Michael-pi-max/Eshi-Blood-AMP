@@ -1,55 +1,55 @@
 [
-    {
-      "_id": "5d7a514b5d2c12c7449be142",
-      "roleName": "user",
-      "privileges": [
-        {
-          "title": "appointment",
-          "permissions": ["read", "create", "update", "delete"]
-        },
-        {
-          "title": "user",
-          "permissions": ["read", "create", "update", "delete"]
-        },
-        {
-          "title": "request",
-          "permissions": ["read", "update"]
-        },
-        {
-          "title": "donationCenter",
-          "permissions": ["read"]
-        },
-        {
-          "title": "role",
-          "permissions": ["read"]
-        }
-      ]
-    },
-    {
-      "_id": "5d7a514b5d2c12c7449be143",
-      "roleName": "admin",
-      "privileges": [
-        {
-          "title": "user",
-          "permissions": ["read", "update", "delete"]
-        },
-        {
-          "title": "role",
-          "permissions": ["read", "create", "update", "delete"]
-        },
-        {
-          "title": "request",
-          "permissions": ["read", "create", "update", "delete"]
-        },
-        {
-          "title": "donationCenter",
-          "permissions": ["read", "create", "update", "delete"]
-        },
-        {
-          "title": "appointment",
-          "permissions": ["read", "update"]
-        }
-      ]
-    }
-  ]
-  
+  {
+    "_id": "5d7a514b5d2c12c7449be142",
+    "roleName": "user",
+    "privileges": [
+      {
+        "title": "user",
+        "permissions": ["read", "create", "update", "delete"]
+      },
+      {
+        "title": "role",
+        "permissions": ["read"]
+      }, 
+      {
+        "title": "request",
+        "permissions": ["read", "update"]
+      },
+      {
+        "title": "donationCenter",
+        "permissions": ["read"]
+      },
+      
+      {
+        "title": "appointment",
+        "permissions": ["read", "create", "update", "delete"]
+      }
+    ]
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be143",
+    "roleName": "admin",
+    "privileges": [
+      {
+        "title": "user",
+        "permissions": ["read", "update", "delete"]
+      },
+      {
+        "title": "role",
+        "permissions": ["read", "create", "update", "delete"]
+      },
+      {
+        "title": "request",
+        "permissions": ["read", "create", "update", "delete"]
+      },
+      {
+        "title": "donationCenter",
+        "permissions": ["read", "create", "update", "delete"]
+      },
+      {
+        "title": "appointment",
+        "permissions": ["read", "update"]
+      }
+    ]
+  }
+]

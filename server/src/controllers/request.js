@@ -1,10 +1,10 @@
 const Request = require("../models/request");
-const Appointment = require("../models/request");
+const Appointment = require("../models/appointment");
 const BloodType = require("../models/bloodType");
 
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
-const { model } = require("mongoose");
+// const { model } = require("mongoose");
 
 exports.getAllRequest = async (req, res, next) => {
   try {
@@ -188,6 +188,7 @@ exports.acceptRequest = async (req, res, next) => {
       });
     }
 
+    console.log(req.params.id);
     let request = await Request.findOne({
       _id: req.params.id,
       isDeleted: false,
@@ -217,12 +218,24 @@ exports.acceptRequest = async (req, res, next) => {
 
     let appointment = await Appointment.create({
       userId: req.user._id,
+      donationCenter: "5d7a514b5d2c12c7449be223",
+      healthCondition:"yes",
+      tattoo:"no",
+      pregnant:"no",
+      weight:"51",
       startDate: new Date().toISOString(),
       endDate: new Date(
         new Date().getTime() + 15 * 24 * 60 * 60 * 1000
       ).toISOString(),
       appointmentDescription: `Appointment using Request ${request._id}: Reason: ${request.reason}`,
     });
+    const user = await User.updateOne(
+      {
+        _id: req.user._id,
+      },
+      { appointed: true }
+    );
+
 
     res.status(200).json({
       status: "success",

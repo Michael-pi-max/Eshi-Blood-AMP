@@ -35,7 +35,7 @@ router
   );
 //appointment by user
 router
-  .route("/user/:userId")
+  .route("/user/history")
   .get(verifyUser, appointmentController.getUserAppointment);
 
 //appointment by donation center

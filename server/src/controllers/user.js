@@ -39,6 +39,7 @@ exports.login = async (req, res, next) => {
 
     const user = await User.findOne({
       phoneNumber: req.body.phoneNumber,
+      isDeleted: false,
     })
       .select("+password")
       .populate("roles bloodType");
@@ -222,6 +223,37 @@ exports.getAllUsers = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       result,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        status: "error",
+        message: errors.array()[0].msg,
+      });
+    }
+
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      isDeleted: true,
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        message: "User with this ID does not exist",
+      });
+    }
+    res.status(200).json({
+      status: "success",
+      user,
     });
   } catch (error) {
     console.log(error);

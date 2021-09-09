@@ -1,25 +1,3 @@
 [
-    {
-      "_id": "5d7a514b5d2c12c7449be520",
-      "userId": "5d7a514b5d2c12c7449be020",
-      "acceptorId": null,
-      "startDate": "2021-07-15T13:45:30",
-      "endDate": "2021-09-15T13:45:30",
-      "status": "pending",
-      "appointmentDescription": "Appoint due to shortage",
-      "weight": "60",
-      "donationCenter": "5d7a514b5d2c12c7449be220"
-    },
-    {
-      "_id": "5d7a514b5d2c12c7449be521",
-      "userId": "5d7a514b5d2c12c7449be020",
-      "acceptorId": null,
-      "startDate": "2021-08-15T13:45:30",
-      "endDate": "2021-10-15T13:45:30",
-      "status": "pending",
-      "appointmentDescription": "Appoint due to shortage",
-      "weight": "80",
-      "donationCenter": "5d7a514b5d2c12c7449be221"
-    }
-  ]
   
+]

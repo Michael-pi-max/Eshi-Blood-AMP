@@ -1,5 +1,5 @@
 const Appointment = require("../models/appointment");
-
+const DonationCenter = require("../models/donationCenter");
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
 
@@ -20,7 +20,6 @@ exports.getAllAppointments = async (req, res, next) => {
     const endDate =
       req.query.endDate || new Date('"December 17, 3000 03:24:00"');
 
-    console.log(startDate);
     const result = await Appointment.paginate(
       {
         isDeleted: false,
@@ -33,7 +32,7 @@ exports.getAllAppointments = async (req, res, next) => {
         limit,
         sort: "-createdAt",
         populate: {
-          path: "userId acceptorId donationCenter",
+          path: "userId acceptorId donationCenter bloodType",
           populate: { path: "roles", model: "Role" },
         },
       }
@@ -94,10 +93,11 @@ exports.createAppointment = async (req, res, next) => {
       });
     }
 
+    let donationCenter = await DonationCenter.findOne({name:req.body.donationCenter});
     const appointment = await Appointment.create({
       ...req.body,
       userId: req.user._id,
-      donationCenter: req.body.donationCenter._id,
+      donationCenter: donationCenter._id,
       startDate: Date(req.body.startDate),
       endDate: Date(req.body.endDate),
     });
@@ -133,10 +133,20 @@ exports.updateAppointment = async (req, res, next) => {
       });
     }
 
+    console.log(req.body);
+    let donationCenter = await DonationCenter.findOne({name:req.body.donationCenter});
+
+    if(donationCenter == null ){
+      donationCenter = req.body.donationCenter
+    }else{
+      donationCenter = donationCenter._id;
+    }
     let appointment = await Appointment.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
+        // acceptorId: req.user._id ? ,
+        donationCenter : donationCenter ,
         startDate: Date(req.body.startDate),
         endDate: Date(req.body.endDate),
       },
@@ -151,14 +161,14 @@ exports.updateAppointment = async (req, res, next) => {
     }
 
     if (req.body.status == "donated") {
-      const user = await User.updateOne(
+       await User.updateOne(
         {
           _id: appointment.userId,
         },
         {
           appointed: false,
           $inc: { totalDonations: 1 },
-          lastDonation: new Date().toISOString,
+          lastDonation: Date.now(),
         }
       ).populate("bloodType roles");
     }
@@ -181,9 +191,12 @@ exports.deleteAppointment = async (req, res, next) => {
         message: errors.array()[0].msg,
       });
     }
+
     const appointment = await Appointment.findByIdAndUpdate(req.params.id, {
       isDeleted: true,
     });
+
+    let user = await User.findByIdAndUpdate(appointment.userId, {appointed:false});
 
     if (!appointment) {
       return res.status(404).json({
@@ -202,7 +215,7 @@ exports.deleteAppointment = async (req, res, next) => {
 
 exports.getUserAppointment = async (req, res, next) => {
   try {
-    const userId = req.params.userId;
+    const userId = req.user._id;
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 1;
     const status = req.query.status || "pending";
@@ -217,6 +230,7 @@ exports.getUserAppointment = async (req, res, next) => {
             userId: { $eq: userId },
           },
         ],
+        status
       },
       {
         page,

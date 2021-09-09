@@ -41,4 +41,11 @@ router.get(
 
 router.get("/search", verifyUser, userController.searchUserByName);
 
+router.delete(
+  "/:id",
+  verifyUser,
+  userValidation.validate("DELETE"),
+  userController.deleteUser
+)
+
 module.exports = router;

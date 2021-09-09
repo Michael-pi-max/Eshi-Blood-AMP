@@ -18,6 +18,7 @@ const timeSlotSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
 timeSlotSchema.plugin(mongoosePaginate);
 
 const TimeSlot = mongoose.model("TimeSlot", timeSlotSchema);

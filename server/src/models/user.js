@@ -48,6 +48,7 @@ const schema = new mongoose.Schema(
     },
     lastDonation: {
       type: String,
+      default:new Date().setDate(new Date().getDate()-95),
     },
     password: {
       type: String,
@@ -94,6 +95,7 @@ schema.methods.verifyPassword = async function (
 };
 
 schema.plugin(mongoosePaginate);
+// schema.methods.
 
 const User = mongoose.model("User", schema);
 

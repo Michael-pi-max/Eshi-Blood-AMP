@@ -32,6 +32,7 @@ const schema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
 schema.plugin(mongoosePaginate);
 
 const BloodType = mongoose.model("BloodType", schema);
