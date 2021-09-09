@@ -58,7 +58,46 @@ class App extends StatelessWidget {
               userRepository: userRepository,
             ),
           ),
-          
+          BlocProvider(
+            create: (context) => SignUpBloc(
+                authRepo: authRepo,
+                authenticationBloc:
+                    BlocProvider.of<AuthenticationBloc>(context)),
+          ),
+          BlocProvider(
+            create: (context) => LoginBloc(
+                authRepository: authRepo,
+                authenticationBloc:
+                    BlocProvider.of<AuthenticationBloc>(context)),
+          ),
+          BlocProvider(
+            create: (context) => RequestBloc(
+              requestRepository: requestRepo,
+            ),
+          ),
+          BlocProvider(
+            create: (context) => AppointmentBloc(
+              appointmentRepository: appointmentRepository,
+            ),
+          ),
+          BlocProvider<DonationCenterBloc>(
+            create: (BuildContext context) => DonationCenterBloc(
+                donationCenterRepository: donationCenterRepository),
+          ),
+          BlocProvider<FormDonationCenterBloc>(
+            create: (BuildContext context) => FormDonationCenterBloc(),
+          ),
+          BlocProvider(
+            create: (context) => RoleBloc(roleRepository: roleRepository),
+          ),
+          BlocProvider(
+            create: (context) =>
+                UserListBloc(userListRepository: userListRepository),
+          ),
+          BlocProvider(
+              create: (context) =>
+                  UpdateBloc(userProfileRepository: updateRepository)
+                    ..add(UpdateOut()))
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
