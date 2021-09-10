@@ -49,7 +49,7 @@ class DonorDB {
         // print(donorRow);
         var _donor = Donor(
           id: donorRow["id"],
-          firstname: donorRow["fistname"],
+          firstname: donorRow["firstname"],
           lastname: donorRow["lastname"],
           phoneNumber: donorRow["phonenumber"],
           email: donorRow["email"],
