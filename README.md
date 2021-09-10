@@ -35,3 +35,14 @@ FULL NAME
 3. Michael Solomon --------------- ATR/8786/11
 4. Mihretu Teshale --------------- ATR/9693/11
 5. Semere Talegngeta ------------- ETR/0229/11
+
+
+
+How to run this project
+
+- you must define .env file with the information described below
+DATABASE_STRING=mongodb://localhost:27017/eshi-blood-amp
+PORT=8000
+NODE_ENV=DEVELOPMENT
+JWT_SECRET_KEY=AS8+BiW+Pldp7bq6N7+/aCjG8Uw6QBSeqIwTmufNnfu0KSO+0o4+SbZ/1upiUdaGDdwQbU5yHeXHTXa3viOzHg==
+JWT_EXPIRES_IN=6000000

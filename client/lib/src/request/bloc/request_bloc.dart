@@ -52,15 +52,15 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
         yield RequestOperationFailure();
       }
     }
-    // if (event is RequestDelete) {
-    //   yield RequestLoading();
-    //   try {
-    //     await requestRepository.deleteRequest(event.request.id ?? "");
-    //     yield RequestDeleteSuccess();
-    //   } catch (e) {
-    //     yield RequestOperationFailure();
-    //   }
-    // }
+    if (event is RequestDelete) {
+      yield RequestLoading();
+      try {
+        await requestRepository.deleteRequest(event.request.id ?? "");
+        yield RequestDeleteSuccess();
+      } catch (e) {
+        yield RequestOperationFailure();
+      }
+    }
 
     if (event is RequestAccept) {
       yield RequestLoading();
