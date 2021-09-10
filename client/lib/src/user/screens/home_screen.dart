@@ -296,3 +296,443 @@ class BottomNavigationWiget extends StatelessWidget {
   }
 }
 
+class HomeWidget extends StatelessWidget {
+  CategoryBrain category = CategoryBrain();
+
+  ScrollController controller = ScrollController();
+  @override
+  Widget build(BuildContext context) {
+    BlocProvider.of<AppointmentBloc>(context).add(AppointmentLoad());
+    return SafeArea(
+      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          return (state is AuthenticationAuthenticated)
+              ? BlocBuilder<AppointmentBloc, AppointmentState>(
+                  builder: (context, aptState) {
+                    return (aptState is AppointmentOperationSuccess)
+                        ? Container(
+                            child: CustomScrollView(
+                              physics: ClampingScrollPhysics(),
+                              controller: controller,
+                              slivers: <Widget>[
+                                SliverAppBar(
+                                  backgroundColor: Color(0xFFD32026),
+                                  expandedHeight: 150.0,
+                                  floating: true,
+                                  leading: Container(),
+                                  snap: true,
+                                  elevation: 50.0,
+                                  pinned: true,
+                                  flexibleSpace: _MyAppSpace(),
+                                ),
+                                SliverStack(
+                                  insetOnOverlap: false,
+                                  children: [
+                                    SliverPositioned.fill(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(30.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SliverPadding(
+                                      padding: EdgeInsets.only(
+                                        top: 40,
+                                        left: 20.0,
+                                        right: 20.0,
+                                        bottom: 20.0,
+                                      ),
+                                      sliver: SliverToBoxAdapter(
+                                        child: (state.user!.appointed)
+                                            ? InkWell(
+                                                onTap: () {
+                                                  aptState.appointments
+                                                      .forEach((element) {
+                                                    if (element.userId["_id"] ==
+                                                            state.user!.id &&
+                                                        element.status ==
+                                                            "pending") {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              RouteGenerator
+                                                                  .appointmentDetail,
+                                                              arguments:
+                                                                  element);
+                                                    }
+                                                  });
+                                                },
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: 120,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        spreadRadius: 2,
+                                                        blurRadius: 14,
+                                                        color: Colors.grey,
+                                                      )
+                                                    ],
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .calendar_today_rounded,
+                                                        size: 50.0,
+                                                        color:
+                                                            Color(0xFFD32026),
+                                                      ),
+                                                      SizedBox(width: 10),
+                                                      Text(
+                                                        'Manage Appointment',
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFFD32026),
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w900,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            : state
+                                                    .user
+                                                    ?.role["privileges"][4]
+                                                        ["permissions"]
+                                                    .contains("create")
+                                                ? DateTime.fromMillisecondsSinceEpoch(int.parse(state.user!.lastDonation ?? '1623501622005'))
+                                                                .add(const Duration(
+                                                                    days: 90))
+                                                                .difference(
+                                                                    DateTime
+                                                                        .now())
+                                                                .inDays >
+                                                            0 &&
+                                                        DateTime.fromMillisecondsSinceEpoch(int.parse(state
+                                                                        .user!
+                                                                        .lastDonation ??
+                                                                    '1623501622005'))
+                                                                .add(const Duration(days: 90))
+                                                                .difference(DateTime.now())
+                                                                .inDays <
+                                                            90
+                                                    ? InkWell(
+                                                        onTap: () {},
+                                                        child: Container(
+                                                          width:
+                                                              double.infinity,
+                                                          height: 120,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color:
+                                                                Colors.white60,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                spreadRadius: 2,
+                                                                blurRadius: 14,
+                                                                color:
+                                                                    Colors.grey,
+                                                              )
+                                                            ],
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Icon(
+                                                                Icons
+                                                                    .calendar_today_rounded,
+                                                                size: 50.0,
+                                                                color: Color(
+                                                                    0xFFD32026),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: 10),
+                                                              Text(
+                                                                '${DateTime.fromMillisecondsSinceEpoch(int.parse(state.user!.lastDonation ?? '1623501622005')).add(const Duration(days: 90)).difference(DateTime.now()).inDays} days left to donate.',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color(
+                                                                      0xFFD32026),
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : InkWell(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  AddAppointment(
+                                                                args: AppointmentArgument(
+                                                                    edit:
+                                                                        false),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          width:
+                                                              double.infinity,
+                                                          height: 120,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                spreadRadius: 2,
+                                                                blurRadius: 14,
+                                                                color:
+                                                                    Colors.grey,
+                                                              )
+                                                            ],
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Icon(
+                                                                Icons
+                                                                    .calendar_today_rounded,
+                                                                size: 50.0,
+                                                                color: Color(
+                                                                    0xFFD32026),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: 10),
+                                                              Text(
+                                                                'Schedule Appointment',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color(
+                                                                      0xFFD32026),
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                : Container(
+                                                    width: double.infinity,
+                                                    height: 120,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          spreadRadius: 2,
+                                                          blurRadius: 14,
+                                                          color: Colors.grey,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'You can not appoint with your current role',
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFFD32026),
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                      ),
+                                    ),
+                                    SliverPadding(
+                                      padding: EdgeInsets.only(
+                                        top: 180,
+                                        left: 20.0,
+                                        right: 20.0,
+                                        bottom: 20.0,
+                                      ),
+                                      sliver: SliverGrid(
+                                        gridDelegate:
+                                            SliverGridDelegateWithMaxCrossAxisExtent(
+                                          maxCrossAxisExtent: 200.0,
+                                          mainAxisSpacing: 30.0,
+                                          crossAxisSpacing: 24.0,
+                                          childAspectRatio: 1.15,
+                                        ),
+                                        delegate: SliverChildBuilderDelegate(
+                                          (BuildContext context, int index) {
+                                            return Material(
+                                              color: Colors.white,
+                                              elevation: 14,
+                                              shadowColor: Colors.grey[200],
+                                              borderRadius:
+                                                  BorderRadius.circular(15.0),
+                                              child: InkWell(
+                                                // TODO: Onclick
+                                                onTap: () {
+                                                  switch (index) {
+                                                    case 0:
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              PageFlipBuilder(
+                                                            frontBuilder: (_) =>
+                                                                DonationCardScreen(),
+                                                            backBuilder: (_) =>
+                                                                DonationHistoryScreen(),
+                                                          ),
+                                                        ),
+                                                      );
+                                                      break;
+                                                    case 1:
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              PageFlipBuilder(
+                                                            frontBuilder: (_) =>
+                                                                DonationHistoryScreen(),
+                                                            backBuilder: (_) =>
+                                                                DonationCardScreen(),
+                                                          ),
+                                                        ),
+                                                      );
+                                                      break;
+
+                                                    case 2:
+                                                      Navigator.pushNamed(
+                                                          context,
+                                                          RouteGenerator
+                                                              .profileScreen);
+                                                      break;
+
+                                                    case 3:
+                                                      Navigator.pushNamed(
+                                                          context,
+                                                          RouteGenerator
+                                                              .eligibilityNoticeScreen);
+                                                      // Navigator.pushNamed(context,
+                                                      //     RouteGenerator.donationHistoryScreen);
+                                                      break;
+
+                                                    case 4:
+                                                      Navigator.pushNamed(
+                                                          context,
+                                                          RouteGenerator
+                                                              .profileScreen);
+                                                      break;
+
+                                                    case 5:
+                                                      Navigator.pushNamed(
+                                                          context,
+                                                          RouteGenerator
+                                                              .setting);
+                                                      break;
+                                                  }
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 1),
+                                                  alignment: Alignment.center,
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    15.0)),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .stretch,
+                                                      children: <Widget>[
+                                                        category.category[index]
+                                                            .icon,
+                                                        SizedBox(
+                                                          height: 4.0,
+                                                        ),
+                                                        Text(
+                                                          category
+                                                              .category[index]
+                                                              .name,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFFD32026),
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          childCount: category.category.length,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          );
+                  },
+                )
+              : Center(
+                  child: CircularProgressIndicator(),
+                );
+        },
+      ),
+    );
+  }
+}

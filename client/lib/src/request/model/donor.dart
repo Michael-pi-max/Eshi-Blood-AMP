@@ -1,6 +1,6 @@
 class Donor {
   String? id;
-  String? fistname;
+  String? firstname;
   String? lastname;
   String? phoneNumber;
   String? email;
@@ -16,7 +16,7 @@ class Donor {
       {this.city,
       this.dateOfBirth,
       this.email,
-      this.fistname,
+      this.firstname,
       this.gender,
       this.id,
       this.image,
@@ -29,8 +29,8 @@ class Donor {
   static Donor fromJson(Map json) {
     Donor donorInstance = Donor();
     donorInstance.id = json["_id"];
-    donorInstance.fistname = json["fistname"];
-    donorInstance.lastname = json["lastname"];
+    donorInstance.firstname = json["firstName"];
+    donorInstance.lastname = json["lastName"];
     donorInstance.phoneNumber = json["phoneNumber"];
     donorInstance.email = json["email"];
     donorInstance.image = json["image"];
@@ -48,7 +48,7 @@ class Donor {
     Map address = {"city": city, "wereda": wereda, "state": state};
     var donorMap = {};
     donorMap["_id"] = id;
-    donorMap["fistname"] = fistname;
+    donorMap["firstname"] = firstname;
     donorMap["lastname"] = lastname;
     donorMap["phonenumber"] = phoneNumber;
     donorMap["email"] = email;

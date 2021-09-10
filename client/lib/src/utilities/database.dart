@@ -77,7 +77,7 @@ class DatabaseProvider {
     await database.execute("CREATE TABLE Donor("
         "dbId INTEGER PRIMARY KEY AUTOINCREMENT, "
         "id varchar,"
-        "fistname varchar,"
+        "firstname varchar,"
         "lastname varchar,"
         "phonenumber varchar,"
         "email varchar,"
