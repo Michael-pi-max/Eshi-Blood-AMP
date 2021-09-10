@@ -9,8 +9,8 @@ class Constants {
 }
 
 BaseOptions options = new BaseOptions(
-    connectTimeout: 3 * 1000, // 60 seconds
-    receiveTimeout: 3 * 1000 // 60 seconds,
+    connectTimeout: 10 * 1000, // 60 seconds
+    receiveTimeout: 10 * 1000 // 60 seconds,
 
     );
 final dio = Dio(options);
